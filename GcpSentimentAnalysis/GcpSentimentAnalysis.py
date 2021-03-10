@@ -42,6 +42,5 @@ def analyze_sentiment(text_content):
     print(u"Language of the text: {}".format(response.language))
     return response
 
-response = analyze_sentiment("pretty good service today.")
-
-print(response)
+# response = analyze_sentiment("pretty good service today.")
+# print(response)

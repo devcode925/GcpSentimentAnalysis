@@ -1,0 +1,14 @@
+document_sentiment {
+  magnitude: 0.9
+  score: 0.9
+}
+language: "en"
+sentences {
+  text {
+    content: "I am so happy and joyful."
+  }
+  sentiment {
+    magnitude: 0.9
+    score: 0.9
+  }
+}
