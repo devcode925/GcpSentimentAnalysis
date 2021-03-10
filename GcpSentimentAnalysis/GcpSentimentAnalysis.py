@@ -1,5 +1,7 @@
 
 from google.cloud import language_v1
+import streamlit as st
+import pandas as pd
 
 def analyze_sentiment(text_content):
     """
@@ -10,8 +12,11 @@ def analyze_sentiment(text_content):
     """
 
     client = language_v1.LanguageServiceClient()
-
-    text_content = 'I am so happy and joyful.'
+    try:
+     if text_content is None:
+        text_content = 'I am so happy and joyful.'
+    except NameError:
+        text_content = 'I am not so happy and joyful.'
 
     # Available types: PLAIN_TEXT, HTML
     type_ = language_v1.Document.Type.PLAIN_TEXT
@@ -44,3 +49,21 @@ def analyze_sentiment(text_content):
 
 # response = analyze_sentiment("pretty good service today.")
 # print(response)
+st.write('Inspects the given text and identifies the prevailing emotional opinion within the text, especially to determine a writer\'s attitude as positive, negative, or neutral.')
+st.write('The scoring range is defined as:')
+
+
+st.write(pd.DataFrame({
+    'Opinion Type': ['Clearly Positive*', 'Clearly Negative', 'Neutral*', 'Mixed*'],
+    'Score': [0.8, -0.6,  0.1, 0.0],
+     'Magnitude': [3.0, 4.0,0.0,4.0],
+}))
+st.title('Sentiment analysis')
+
+
+text_to_analysis = st.text_input('Enter your text here')
+
+
+if st.button('Get the Score'):
+    generated_text = analyze_sentiment(text_to_analysis)
+    st.write(generated_text)
